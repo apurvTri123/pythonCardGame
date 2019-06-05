@@ -57,19 +57,20 @@ class Game:
         print("GlobalDiscard",discardedDeck)      
         discardedDeck.append(card)
         discardedDeck.append(card2)
+        # print("Rank check",card['Rank'] > card2['Rank'],card['Rank'] ,card2['Rank'])
         if(ch == 1):
-            if(card['Rank'] > card2['Rank']):
+            if(card['Rank'] < card2['Rank']):
                 player1.score = player1.score+1
                 
-                print (player1.playerName+" Wins!!  Score : ", player1.score)
+                print (player1.Name," Wins!!  Score : ", player1.score)
                 if(len(player2.cardDeck) > 0 and len(player1.cardDeck) > 0):
                     player1.play()
                 else:
                     gameEnds()
-            elif(card['Rank'] < card2['Rank']):
+            elif(card['Rank'] > card2['Rank']):
                     player2.score = player2.score+1
                     
-                    print(player2.playerName + "Wins!!  Score : ")
+                    print(player2.Name,"Wins!!  Score : ")
                     if(len(player2.cardDeck) > 0 and len(player1.cardDeck) > 0):
                         player2.play()
                     else:
@@ -77,14 +78,14 @@ class Game:
         if(ch == 2):
             if(card['Weight'] > card2['Weight']):
                 player1.score = player1.score+1
-                print (player1.playerName + " Wins!!  Score : ", player1.score)
+                print (player1.Name + " Wins!!  Score : ", player1.score)
                 if(len(player2.cardDeck) > 0 and len(player1.cardDeck) > 0):
                     player1.play()
                 else:
                     gameEnds()
             elif(card['Weight'] < card2['Weight']):
                 player2.score = player2.score+1
-                print (player2.playerName + "Wins!!  Score : ", player2.score)
+                print (player2.Name + "Wins!!  Score : ", player2.score)
                 if(len(player2.cardDeck) > 0 and len(player1.cardDeck) > 0):
                     player2.play()
                 else:
@@ -93,14 +94,14 @@ class Game:
             print("asc",card,card2,card['Height'] > card2['Height'],card['Height'] ,card2['Height'],type(card2['Height']),type(card['Height']))
             if(card['Height'] > card2['Height']):
                 player1.score = player1.score+1
-                print (player1.playerName + "Wins!!  Score : ", player1.score)
+                print (player1.Name + "Wins!!  Score : ", player1.score)
                 if(len(player2.cardDeck) > 0 and len(player1.cardDeck) > 0):
                     player1.play()
                 else:
                     gameEnds()
             elif(card['Height'] < card2['Height']):
                 player2.score = player2.score+1
-                print (player2.playerName + "Wins!!  Score : ", player2.score)
+                print (player2.Name + "Wins!!  Score : ", player2.score)
                 if(len(player2.cardDeck) > 0 and len(player1.cardDeck) > 0):
                     player2.play()
                 else:
@@ -121,7 +122,7 @@ class Game:
         if(choice == 1):
             self.playCard()
         elif(choice == 2):
-            print("XX no conditio for god spell")
+            # print("XX no conditio for god spell")
             if(self.spellGod):
                 self.spellGod=False
                 self.godSpell()
@@ -129,7 +130,7 @@ class Game:
                 print("God spell can only be used once in an entire game")
                 self.play()
         elif(choice == 3):
-            print("yyy no condition for resurrection spell")
+            # print("yyy no condition for resurrection spell")
             if(self.spellRes==False):
                 print("You can only play a spell once")
                 self.play()
@@ -149,7 +150,7 @@ class Game:
             deck=player2.cardDeck
         else:
             deck=player1.cardDeck
-        print("Inside gods spell",deck)
+        # print("Inside gods spell",deck)
         if(len(discardedDeck)>=0):
             print(self.Name + " Please choose a card for 2nd player")
             print("choose number between "+ " 1 "+" and "+ str(len(deck)))
@@ -178,7 +179,7 @@ class Game:
             obj=player1
             player1.cardDeck.remove(card)
             player1.cardDeck.insert(0,card)
-        print(obj.playerName+" Please choose between continue play or resurrection spell")
+        print(obj.Name," Please choose between continue play or resurrection spell")
         print("Press 1-->for continue play and Press 2-->for resurrection spell")
         # if(name=="CPU"):
         #     print("Check for cpu")
@@ -225,7 +226,7 @@ class Game:
             obj=player1
         if(self.spellRes==False):
             print("Reserection spell can only be used once by a player")
-            print(obj.playerName," please make next move")
+            print(obj.Name," please make next move")
             obj.play()
         print(obj.Name," Please press 1 to allow the other player to play with new card and 2 to not allow")
         action=input("Please provide Input ")
@@ -259,10 +260,11 @@ def gameEnds():
         score = player1.score
     elif(player1.score == player2.score):
         print("<---Its a Draw--->")
+        pageLoad()
     else:
         name = player2
         # score = player2.score
-    print(name.playerName," wins !!!")
+    print(name.Name," wins !!!")
     print("Score : ",name.score)
     pageLoad()
 
